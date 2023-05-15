@@ -1,0 +1,64 @@
+# Project: 通讯录管理
+# Makefile created by Dev-C++ 5.11
+
+CPP      = g++.exe -D__DEBUG__
+CC       = gcc.exe -D__DEBUG__
+WINDRES  = windres.exe
+OBJ      = src/Add.o src/Bool.o src/Cover.o src/Delete.o src/Input.o src/ReadIn.o src/Save.o src/Search.o src/Show.o src/StructInit.o src/Update.o main.o src/Menu.o
+LINKOBJ  = src/Add.o src/Bool.o src/Cover.o src/Delete.o src/Input.o src/ReadIn.o src/Save.o src/Search.o src/Show.o src/StructInit.o src/Update.o main.o src/Menu.o
+LIBS     = -L"D:/Dev-Cpp/MinGW64/lib" -L"D:/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc -g3
+INCS     = -I"D:/Dev-Cpp/MinGW64/include" -I"D:/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"D:/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
+CXXINCS  = -I"D:/Dev-Cpp/MinGW64/include" -I"D:/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"D:/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"D:/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
+BIN      = 通讯录管理.exe
+CXXFLAGS = $(CXXINCS) -g3 -std=c99
+CFLAGS   = $(INCS) -g3 -std=c99
+RM       = rm.exe -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CC) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+src/Add.o: src/Add.c
+	$(CC) -c src/Add.c -o src/Add.o $(CFLAGS)
+
+src/Bool.o: src/Bool.c
+	$(CC) -c src/Bool.c -o src/Bool.o $(CFLAGS)
+
+src/Cover.o: src/Cover.c
+	$(CC) -c src/Cover.c -o src/Cover.o $(CFLAGS)
+
+src/Delete.o: src/Delete.c
+	$(CC) -c src/Delete.c -o src/Delete.o $(CFLAGS)
+
+src/Input.o: src/Input.c
+	$(CC) -c src/Input.c -o src/Input.o $(CFLAGS)
+
+src/ReadIn.o: src/ReadIn.c
+	$(CC) -c src/ReadIn.c -o src/ReadIn.o $(CFLAGS)
+
+src/Save.o: src/Save.c
+	$(CC) -c src/Save.c -o src/Save.o $(CFLAGS)
+
+src/Search.o: src/Search.c
+	$(CC) -c src/Search.c -o src/Search.o $(CFLAGS)
+
+src/Show.o: src/Show.c
+	$(CC) -c src/Show.c -o src/Show.o $(CFLAGS)
+
+src/StructInit.o: src/StructInit.c
+	$(CC) -c src/StructInit.c -o src/StructInit.o $(CFLAGS)
+
+src/Update.o: src/Update.c
+	$(CC) -c src/Update.c -o src/Update.o $(CFLAGS)
+
+main.o: main.c
+	$(CC) -c main.c -o main.o $(CFLAGS)
+
+src/Menu.o: src/Menu.c
+	$(CC) -c src/Menu.c -o src/Menu.o $(CFLAGS)
