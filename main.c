@@ -8,14 +8,16 @@
 #include ".\inc\Tel.h"
 
 #include ".\inc\StructInit.h"
+#include ".\inc\Auth.h"
 #include ".\inc\ReadIn.h"
 #include ".\inc\Menu.h"
-
 
 int main(int argc, char *argv[])
 {
     Telinf tel[MAXROW];  // 定义数组变量
 
+    Auth();
+    
     int length = 0; // 定义数组实际长度
 
 	length = ReadIn(tel, length); // 从文件中读取数据
@@ -24,7 +26,7 @@ int main(int argc, char *argv[])
         StructInit(tel); // 初始化结构体
         length++;
     }
-
+    
     Menu(tel, length);
 
     return 0;
