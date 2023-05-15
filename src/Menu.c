@@ -15,9 +15,10 @@
 #include "..\inc\Save.h"
 #include "..\inc\Update.h"
 
-void Menu(Telinf tel[], int length)
+void Menu(char *FILE_NAME, Telinf tel[], int length)
 {
     char choice = {0}; // 选择变量
+    int exit = 1;      // 退出变量
 
     do
     {
@@ -29,14 +30,14 @@ void Menu(Telinf tel[], int length)
 
         while (getchar() != '\n') // 清空缓冲区
             continue;
-        // 选择菜单 
+        // 选择菜单
         switch (choice)
         {
         case '1':
             length = add(tel, length); // 添加一行数据
             break;
         case '2':
-            length = delete(tel, length); // 删除指定数据
+            length = delete (tel, length); // 删除指定数据
             break;
         case '3':
             update(tel, length); // 修改指定数据
@@ -48,12 +49,13 @@ void Menu(Telinf tel[], int length)
             show(tel, length); // 显示所有数据
             break;
         case '0':
-            save(tel, length); // 退出并保存数据在文件中
+            save(FILE_NAME, tel, length); // 退出并保存数据在文件中
+            exit = 0;
             break;
         default:
             printf("输入错误，请重新输入\n");
             break;
         }
         system("pause");
-    } while (1);
+    } while (exit);
 }

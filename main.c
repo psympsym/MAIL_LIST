@@ -14,20 +14,29 @@
 
 int main(int argc, char *argv[])
 {
-    Telinf tel[MAXROW];  // 定义数组变量
+    Telinf tel[MAXROW]; // 定义数组变量
+    // 登录成功的用户名
+    char username[MAXUN];
+    // 以用户名创建的文件名
+    char FILE_NAME[MAXUN + 40] = {0};
 
-    Auth();
-    
     int length = 0; // 定义数组实际长度
-
-	length = ReadIn(tel, length); // 从文件中读取数据
-    if (length == 0) // 若读入空数据
+    while (1)
     {
-        StructInit(tel); // 初始化结构体
-        length++;
-    }
-    
-    Menu(tel, length);
+        Auth(username); // 用户登录
 
+        // 定义文件名，由[用户名+Data]组成
+        sprintf(FILE_NAME, "%s%s", username, "_Data.txt");
+
+        length = ReadIn(FILE_NAME, tel, length); // 从文件中读取数据
+        if (length == 0)                         // 若读入空数据
+        {
+            StructInit(tel); // 初始化结构体
+            length++;
+        }
+
+        Menu(FILE_NAME, tel, length);
+
+    }
     return 0;
 }

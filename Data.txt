@@ -1,5 +1,0 @@
-姓名       性别 家庭电话         移动电话         工作电话         年龄
-nfawel     nan  fnaowef          fawnrov          nvawr            fnao
-asfdljasn  fnae awngrej          fanweljkvfn      gnawerogn        gnaw
-王浩然     nan  321              123              654321               
-当前共有3条数据

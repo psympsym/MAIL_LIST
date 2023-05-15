@@ -4,8 +4,8 @@
 CPP      = g++.exe -D__DEBUG__
 CC       = gcc.exe -D__DEBUG__
 WINDRES  = windres.exe
-OBJ      = src/Add.o src/Bool.o src/Cover.o src/Delete.o src/Input.o src/ReadIn.o src/Save.o src/Search.o src/Show.o src/StructInit.o src/Update.o main.o src/Auth.o src/Menu.o
-LINKOBJ  = src/Add.o src/Bool.o src/Cover.o src/Delete.o src/Input.o src/ReadIn.o src/Save.o src/Search.o src/Show.o src/StructInit.o src/Update.o main.o src/Auth.o src/Menu.o
+OBJ      = src/Add.o src/Bool.o src/Cover.o src/Delete.o src/Input.o src/ReadIn.o src/Save.o src/Search.o src/Show.o src/StructInit.o src/Update.o main.o src/Auth.o src/Menu.o src/Query.o
+LINKOBJ  = src/Add.o src/Bool.o src/Cover.o src/Delete.o src/Input.o src/ReadIn.o src/Save.o src/Search.o src/Show.o src/StructInit.o src/Update.o main.o src/Auth.o src/Menu.o src/Query.o
 LIBS     = -L"D:/Dev-Cpp/MinGW64/lib" -L"D:/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc -g3
 INCS     = -I"D:/Dev-Cpp/MinGW64/include" -I"D:/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"D:/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
 CXXINCS  = -I"D:/Dev-Cpp/MinGW64/include" -I"D:/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"D:/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"D:/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
@@ -65,3 +65,6 @@ src/Auth.o: src/Auth.c
 
 src/Menu.o: src/Menu.c
 	$(CC) -c src/Menu.c -o src/Menu.o $(CFLAGS)
+
+src/Query.o: src/Query.c
+	$(CC) -c src/Query.c -o src/Query.o $(CFLAGS)

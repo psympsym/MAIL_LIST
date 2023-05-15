@@ -1,11 +1,11 @@
-ï»¿#ifndef _Tel_h_
+#ifndef _Tel_h_
 #define _Tel_h_
 
-/* å®å®šä¹‰ */
-#define FILE_NAME "Data.txt"
-#define DESKFILE_NAME "C:\\Users\\WHR\\Desktop\\Data.txt"
-// å®å®šä¹‰è´¦æˆ·ä¿¡æ¯æ–‡ä»¶å
-#define USER_FILE "User.txt"
+/* ºê¶¨Òå */
+// #define FILE_NAME "Data.txt"
+// #define DESKFILE_NAME "C:\\Users\\WHR\\Desktop\\Data.txt"
+// ºê¶¨ÒåÕË»§ĞÅÏ¢ÎÄ¼şÃû
+#define USER_FILE "User.dat"
 
 #define MAXROW 200
 #define MAX_NAME 11
@@ -18,18 +18,18 @@
 #define MAXUN  17
 #define MAXPSW 17
 
-/* ç»“æ„ä½“å®šä¹‰ */
+/* ½á¹¹Ìå¶¨Òå */
 typedef struct tel
 {
-    char name[MAX_NAME];             /*å§“å*/
-    char sex[MAX_SEX];               /*æ€§åˆ«*/
-    char tel_phone[MAX_TEL_PHONE];   /*å®¶åº­ç”µè¯*/
-    char mobile[MAX_MOBILE];         /*ç§»åŠ¨ç”µè¯*/
-    char tel_office[MAX_TEL_OFFICE]; /*åŠå…¬ç”µè¯*/
-    char age[MAX_AGE];                         // å¹´é¾„
+    char name[MAX_NAME];             /*ĞÕÃû*/
+    char sex[MAX_SEX];               /*ĞÔ±ğ*/
+    char tel_phone[MAX_TEL_PHONE];   /*¼ÒÍ¥µç»°*/
+    char mobile[MAX_MOBILE];         /*ÒÆ¶¯µç»°*/
+    char tel_office[MAX_TEL_OFFICE]; /*°ì¹«µç»°*/
+    char age[MAX_AGE];                         // ÄêÁä
 } Telinf;
 
-// å®šä¹‰ç”¨æˆ·ç»“æ„ä½“
+// ¶¨ÒåÓÃ»§½á¹¹Ìå
 typedef struct user 
 {
     char username[MAXUN];
