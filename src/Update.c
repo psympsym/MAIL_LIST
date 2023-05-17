@@ -31,7 +31,7 @@ void update(Telinf tel[], int length)
         {
             flag = 1;
 
-            printf("%-10s %-4s %-16s %-16s %-16s %-4s\n", tel[i].name, tel[i].sex, tel[i].tel_phone, tel[i].mobile, tel[i].tel_office, tel[i].age); // 显示信息
+            printf("%-10s %-4s %-16s %-16s %-16s %-4s\n", tel[i].name, tel[i].sex, tel[i].tel_phone, tel[i].mobile, tel[i].QQ, tel[i].age); // 显示信息
 
             printf("请输入要修改的姓名：");
             s_scanf(tel[i].name, MAX_NAME);
@@ -41,8 +41,8 @@ void update(Telinf tel[], int length)
             s_scanf(tel[i].tel_phone, MAX_TEL_PHONE);
             printf("请输入要修改的移动电话：");
             s_scanf(tel[i].mobile, MAX_MOBILE);
-            printf("请输入要修改的办公电话：");
-            s_scanf(tel[i].tel_office, MAX_TEL_OFFICE);
+            printf("请输入要修改的QQ: ");
+            s_scanf(tel[i].QQ, MAX_QQ);
             printf("请输入要修改的年龄：");
             s_scanf(tel[i].age, MAX_AGE);
 
@@ -53,7 +53,7 @@ void update(Telinf tel[], int length)
     if (flag == 0)
     {
         printf("没有找到该联系人\n");
-        printf("是否添加该联系人(Y/N)？\n");
+        printf("是否添加该联系人(Y/N)\n");
         if (bool())
         {
             add(tel, length);

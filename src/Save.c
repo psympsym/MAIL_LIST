@@ -28,7 +28,7 @@ void save(char *FILE_NAME, Telinf tel[], int length)
 		{
 			fprintf(fp, "%-10s %-4s %-16s %-16s %-16s %-4s\n",
 				tel[i].name, tel[i].sex, tel[i].tel_phone,
-				tel[i].mobile, tel[i].tel_office, tel[i].age);
+				tel[i].mobile, tel[i].QQ, tel[i].age);
 		}
 
 		fprintf(fp, "当前共有%d条数据\n", length - 1);

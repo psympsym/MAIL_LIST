@@ -10,7 +10,7 @@
 #include "..\inc\Add.h"
 #include "..\inc\Cover.h"
 #include "..\inc\Delete.h"
-#include "..\inc\Search.h"
+#include "..\inc\Query.h"
 #include "..\inc\Show.h"
 #include "..\inc\Save.h"
 #include "..\inc\Update.h"
@@ -43,13 +43,13 @@ void Menu(char *FILE_NAME, Telinf tel[], int length)
             update(tel, length); // 修改指定数据
             break;
         case '4':
-            search(tel, length); // 查找数据
+            Query(tel, length); // 查询数据
             break;
         case '5':
             show(tel, length); // 显示所有数据
             break;
         case '0':
-            save(FILE_NAME, tel, length); // 退出并保存数据在文件中
+            save(FILE_NAME, tel, length); // 退出并保存数据在文件
             exit = 0;
             break;
         default:

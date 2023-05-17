@@ -18,6 +18,6 @@ void StructInit(Telinf tel[]) // 初始化结构体
     strcpy(tel[0].sex, "性别");
     strcpy(tel[0].tel_phone, "家庭电话");
     strcpy(tel[0].mobile, "移动电话");
-    strcpy(tel[0].tel_office, "工作电话");
+    strcpy(tel[0].QQ, "QQ");
     strcpy(tel[0].age, "年龄");
 }

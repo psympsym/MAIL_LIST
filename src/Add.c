@@ -31,8 +31,8 @@ int add(Telinf tel[], int length)
         s_scanf(tel[length].tel_phone, MAX_TEL_PHONE);
         printf("请输入移动电话：");
         s_scanf(tel[length].mobile, MAX_MOBILE);
-        printf("请输入办公电话：");
-        s_scanf(tel[length].tel_office, MAX_TEL_OFFICE);
+        printf("请输入QQ: ");
+        s_scanf(tel[length].QQ, MAX_QQ);
         printf("请输入年龄：");
         s_scanf(tel[length].age, MAX_AGE);
 

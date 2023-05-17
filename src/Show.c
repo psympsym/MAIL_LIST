@@ -17,6 +17,6 @@ void show(Telinf tel[], int length)
 	system("cls");
     for (int i = 0; i < length; i++)
     {
-        printf("%-10s %-4s %-16s %-16s %-16s %-4s\n", tel[i].name, tel[i].sex, tel[i].tel_phone, tel[i].mobile, tel[i].tel_office, tel[i].age);
+        printf("%-10s %-4s %-16s %-16s %-16s %-4s\n", tel[i].name, tel[i].sex, tel[i].tel_phone, tel[i].mobile, tel[i].QQ, tel[i].age);
     }
 }

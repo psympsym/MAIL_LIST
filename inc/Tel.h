@@ -12,7 +12,7 @@
 #define MAX_SEX 5
 #define MAX_TEL_PHONE 17
 #define MAX_MOBILE 17
-#define MAX_TEL_OFFICE 17
+#define MAX_QQ 17
 #define MAX_AGE 5
 
 #define MAXUN  17
@@ -25,8 +25,8 @@ typedef struct tel
     char sex[MAX_SEX];               /*性别*/
     char tel_phone[MAX_TEL_PHONE];   /*家庭电话*/
     char mobile[MAX_MOBILE];         /*移动电话*/
-    char tel_office[MAX_TEL_OFFICE]; /*办公电话*/
-    char age[MAX_AGE];                         // 年龄
+    char QQ[MAX_QQ];         /*QQ*/
+    char age[MAX_AGE];               /*年龄*/
 } Telinf;
 
 // 定义用户结构体

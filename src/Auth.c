@@ -19,7 +19,7 @@ char *inPass(char *str, int length);
  * @brief 用户登录函数
  * @param username 用户名
  * @return none
-*/
+ */
 void Auth(char *username)
 {
     // 输入选择
@@ -61,6 +61,12 @@ void Auth(char *username)
                 option = '0';
             break;
         case '0':
+            system("cls");
+            printf("===============================================\n");
+            printf("=========     感谢您的使用和支持！    =========\n");
+            printf("=========   您的贡献让我们更加卓越    =========\n");
+            printf("========= 期待再次与您相遇，祝您愉快! =========\n");
+            printf("===============================================\n");
             exit(0);
             break;
         default:
@@ -76,7 +82,7 @@ void Auth(char *username)
  * @param username 用户名
  * @param password 密码
  * @return 登录是否成功
-*/
+ */
 int login(char *username, char *password)
 {
     FILE *file;
@@ -127,6 +133,7 @@ int login(char *username, char *password)
             }
         }
     }
+
     // 没有找到匹配的用户名
     fclose(file);
     printf("未找到该账户，请先注册该账户\n");
@@ -139,7 +146,7 @@ int login(char *username, char *password)
  * @param username 用户名
  * @param password 密码
  * @return 返回注册是否成功
-*/
+ */
 int register_account(char *username, char *password)
 {
     char repassword[MAXPSW];
@@ -181,7 +188,8 @@ int register_account(char *username, char *password)
             {
                 found = 1;
                 printf("账号 %s 已经存在!\n", username);
-                break;
+                system("pause");
+                return 0;
             }
         }
 

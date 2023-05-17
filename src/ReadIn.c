@@ -7,7 +7,7 @@
 
 #include "..\inc\Tel.h"
 /* ----------------------------------- 宏定义 ---------------------------------- */
-#define STR_LEN MAX_NAME + MAX_SEX + MAX_TEL_PHONE + MAX_MOBILE + MAX_TEL_OFFICE + MAX_AGE + 1  // 读取文件单行数据最大长度
+#define STR_LEN MAX_NAME + MAX_SEX + MAX_TEL_PHONE + MAX_MOBILE + MAX_QQ + MAX_AGE + 1  // 读取文件单行数据最大长度
 
 int ReadIn(char *FILE_NAME, Telinf tel[], int length)
 {
@@ -59,9 +59,9 @@ int ReadIn(char *FILE_NAME, Telinf tel[], int length)
             tel[length].mobile[MAX_MOBILE - 1] = '\0';
             tp += MAX_MOBILE;
 
-            strncpy(tel[length].tel_office, tp, MAX_TEL_OFFICE);
-            tel[length].tel_office[MAX_TEL_OFFICE - 1] = '\0';
-            tp += MAX_TEL_OFFICE;
+            strncpy(tel[length].QQ, tp, MAX_QQ);
+            tel[length].QQ[MAX_QQ - 1] = '\0';
+            tp += MAX_QQ;
 
             strncpy(tel[length].age, tp, MAX_AGE);
             tel[length].age[MAX_AGE - 1] = '\0';
