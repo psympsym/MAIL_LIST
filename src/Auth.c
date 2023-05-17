@@ -5,6 +5,7 @@
 #include <math.h>
 #include <windows.h>
 #include <conio.h>
+#include <ctype.h> // 引入 ctype.h 以使用 isalpha 和 isdigit 函数
 
 #include "..\inc\Tel.h"
 
@@ -14,6 +15,7 @@
 int login(char *username, char *password);
 int register_account(char *username, char *password);
 char *inPass(char *str, int length);
+int check_password_strength(const char *password);
 
 /**
  * @brief 用户登录函数
@@ -197,15 +199,15 @@ int register_account(char *username, char *password)
             break;
     }
 
-    // 获取密码，确保两次输入的密码一致
+    // 获取密码，确保两次输入的密码一致且符合要求
     while (1)
     {
-        printf("请输入要注册账号的密码(8-16位):");
+        printf("请输入要注册账号的密码(8-16位, 至少包含字母和数字):");
         inPass(password, MAXPSW);
         printf("\n");
-        if (strlen(password) < 8 || strlen(password) > 16)
+        if (strlen(password) < 8 || strlen(password) > 16 || !check_password_strength(password))
         {
-            printf("密码长度不符合要求, 请重新输入!\n");
+            printf("密码长度不符合要求或强度不够, 请重新输入!\n");
             continue;
         }
         printf("请确认你的密码: ");
@@ -262,4 +264,25 @@ char *inPass(char *str, int length)
     }
     str[count] = '\0';
     return str;
+}
+
+/**
+ * @brief 检查密码是否包含至少一个字母和一个数字
+ * @param password 密码
+ * @return 密码符合要求返回 1，否则返回 0
+ */
+int check_password_strength(const char *password)
+{
+    int has_alpha = 0, has_digit = 0;
+
+    for (int i = 0; password[i] != '\0'; i++)
+    {
+        if (isalpha(password[i])) // 包含字母
+            has_alpha = 1;
+        if (isdigit(password[i])) // 包含数字
+            has_digit = 1;
+        if (has_alpha && has_digit)
+            return 1;
+    }
+    return 0;
 }
