@@ -4,7 +4,6 @@
 #include <string.h>
 #include <math.h>
 #include <windows.h>
-#include <conio.h>
 #include <ctype.h> // 引入 ctype.h 以使用 isalpha 和 isdigit 函数
 
 #include "..\inc\Tel.h"
@@ -12,6 +11,7 @@
 #include "..\inc\Input.h" // 提供 s_scanf() 函数
 
 /* ---------------------------------- 函数声明 ---------------------------------- */
+
 int login(char *username, char *password);
 int register_account(char *username, char *password);
 char *inPass(char *str, int length);
