@@ -5,6 +5,7 @@
 #include <math.h>
 #include <windows.h>
 #include <ctype.h> // 引入 ctype.h 以使用 isalpha 和 isdigit 函数
+#include <conio.h> // 引入 conio.h 以使用 getch 函数
 
 #include "..\inc\Tel.h"
 
@@ -12,10 +13,12 @@
 
 /* ---------------------------------- 函数声明 ---------------------------------- */
 
-int login(char *username, char *password);
-int register_account(char *username, char *password);
+int login(char *username, int *key);
+int register_account(char *username, int *key);
 char *inPass(char *str, int length);
 int check_password_strength(const char *password);
+char *encryption(char *str, int *key);
+char *decrypt(char *str, int *key);
 
 /**
  * @brief 用户登录函数
@@ -28,9 +31,8 @@ void Auth(char *username)
     char option = 0;
     // 判断输入是否错误
     int inerror = 0;
-
-    // 保存读入的密码
-    char password[MAXPSW];
+    // 密钥
+    int key[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5};
 
     do
     {
@@ -42,6 +44,7 @@ void Auth(char *username)
         printf("**********       2.注册新账号      **********\n");
         printf("**********         0.退出          **********\n");
         printf("********************************************\n");
+        // 如果输入错误，则提示重新输入
         if (inerror)
         {
             printf("请输入正确的选项!\n");
@@ -55,11 +58,11 @@ void Auth(char *username)
         switch (option)
         {
         case '1':
-            if (login(username, password) == 1)
+            if (login(username, key) == 1)
                 option = '0';
             break;
         case '2':
-            if (register_account(username, password) == 1)
+            if (register_account(username, key) == 1)
                 option = '0';
             break;
         case '0':
@@ -85,14 +88,19 @@ void Auth(char *username)
  * @param password 密码
  * @return 登录是否成功
  */
-int login(char *username, char *password)
+int login(char *username, int *key)
 {
     FILE *file;
     User user;
 
+    // 保存读入的密码
+    char password[MAXPSW];
+
     // 打开账户信息文件
     file = fopen(USER_FILE, "rb"); // 以二进制格式打开文件
-    if (!file)                     // 如果文件不存在，则创建一个新的 User.dat 文件
+
+    // 如果文件不存在，则创建一个新的 User.dat 文件
+    if (!file)
     {
         file = fopen(USER_FILE, "wb+");
         fclose(file);
@@ -113,13 +121,15 @@ int login(char *username, char *password)
     // 逐个用户读取文件并比对用户名和密码
     while (fread(&user, sizeof(User), 1, file) == 1)
     {
-        if (!strcmp(username, user.username)) // 用户名匹配
+        // if (!strcmp(username, user.username)) // 用户名匹配
+        if (!strcmp(username, decrypt(user.username, key)))
         {
             printf("请输入密码：");
             inPass(password, MAXPSW);
             printf("\n");
 
-            if (!strcmp(password, user.password)) // 密码匹配
+            // if (!strcmp(password, user.password)) //
+            if (!strcmp(password, decrypt(user.password, key)))
             {
                 fclose(file);
                 system("cls");
@@ -149,8 +159,10 @@ int login(char *username, char *password)
  * @param password 密码
  * @return 返回注册是否成功
  */
-int register_account(char *username, char *password)
+int register_account(char *username, int *key)
 {
+    // 保存读入的密码
+    char password[MAXPSW];
     char repassword[MAXPSW];
 
     FILE *file;
@@ -182,11 +194,16 @@ int register_account(char *username, char *password)
         printf("请输入要注册的账号名称: ");
         s_scanf(username, MAXUN);
 
+        // 移至文件开头
         rewind(file);
+
+        // 判断是否已存在该账号
         int found = 0;
+
         while (fread(&user, sizeof(User), 1, file) == 1)
         {
-            if (!strcmp(username, user.username))
+            // if (!strcmp(username, user.username))
+            if (!strcmp(username, decrypt(user.username, key)))
             {
                 found = 1;
                 printf("账号 %s 已经存在!\n", username);
@@ -196,8 +213,13 @@ int register_account(char *username, char *password)
         }
 
         if (!found)
+        {
             break;
+        }
     }
+
+    // 计入注册失败次数
+    int failedAttempts = 0;
 
     // 获取密码，确保两次输入的密码一致且符合要求
     while (1)
@@ -205,17 +227,34 @@ int register_account(char *username, char *password)
         printf("请输入要注册账号的密码(8-16位, 至少包含字母和数字):");
         inPass(password, MAXPSW);
         printf("\n");
+
         if (strlen(password) < 8 || strlen(password) > 16 || !check_password_strength(password))
         {
             printf("密码长度不符合要求或强度不够, 请重新输入!\n");
+            failedAttempts++;
+            if (failedAttempts > 2)
+            {
+                printf("密码输入错误次数过多, 请重新注册!\n");
+                system("pause");
+                return 0;
+            }
             continue;
         }
+
         printf("请确认你的密码: ");
         inPass(repassword, MAXPSW);
         printf("\n");
+
         if (strcmp(password, repassword))
         {
             printf("两次输入的密码不一致, 请重新输入!\n");
+            failedAttempts++;
+            if (failedAttempts > 2)
+            {
+                printf("密码输入错误次数过多, 请重新注册!\n");
+                system("pause");
+                return 0;
+            }
         }
         else
         {
@@ -224,8 +263,8 @@ int register_account(char *username, char *password)
     }
 
     // 写入用户名和密码
-    strcpy(user.username, username);
-    strcpy(user.password, password);
+    strcpy(user.username, encryption(username, key));
+    strcpy(user.password, encryption(password, key));
     fwrite(&user, sizeof(User), 1, file);
 
     // 关闭文件并提示注册成功
@@ -285,4 +324,42 @@ int check_password_strength(const char *password)
             return 1;
     }
     return 0;
+}
+
+/**
+ * @brief 加密函数
+ * @param str 要加密的字符串
+ * @param key 密钥
+ * @return 返回加密后的字符串
+ */
+char *encryption(char *str, int *key)
+{
+    char *ciphertext;
+    int i;
+
+    for (i = 0; str[i] != '\0'; i++)
+    {
+        ciphertext[i] = str[i] + key[i % sizeof(key)];
+    }
+    ciphertext[i] = '\0';
+    return ciphertext;
+}
+
+/**
+ * @brief 解密函数
+ * @param str 要解密的字符串
+ * @param key 密钥
+ * @return 返回解密后的字符串
+ */
+char *decrypt(char *str, int *key)
+{
+    char *plaintext;
+    int i;
+
+    for (i = 0; str[i] != '\0'; i++)
+    {
+        plaintext[i] = str[i] - key[i % sizeof(key)];
+    }
+    plaintext[i] = '\0';
+    return plaintext;
 }
